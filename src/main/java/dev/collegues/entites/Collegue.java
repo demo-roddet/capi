@@ -59,11 +59,12 @@ public class Collegue {
 		this.photoUrl = photoUrl;
 	}
 
-	public Collegue(String nom, String prenoms, LocalDate dateDeNaissance, String photoUrl) {
+	public Collegue(String nom, String prenoms, String email, LocalDate dateDeNaissance, String photoUrl) {
 		this.nom = nom;
 		this.prenoms = prenoms;
 		this.dateDeNaissance = dateDeNaissance;
 		this.photoUrl = photoUrl;
+		this.email = email;
 	}
 
 	/**

@@ -3,10 +3,7 @@ package dev.collegues.dto;
 import dev.collegues.entites.Collegue;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class CreerCollegueReqDto {
@@ -16,19 +13,15 @@ public class CreerCollegueReqDto {
 	private String nom;
 	@Size(min = 2)
 	private String prenoms;
+	@NotNull
+	@Email
+	private String email;
 
 	@NotNull
 	@Past
 	private LocalDate dateDeNaissance;
 	@Size(min = 5)
 	private String photoUrl;
-
-	public CreerCollegueReqDto(String nom, String prenoms, LocalDate dateDeNaissance, String photoUrl) {
-		this.nom = nom;
-		this.prenoms = prenoms;
-		this.dateDeNaissance = dateDeNaissance;
-		this.photoUrl = photoUrl;
-	}
 
 	public CreerCollegueReqDto() {
 	}
@@ -66,6 +59,14 @@ public class CreerCollegueReqDto {
 	}
 
 	public Collegue toCollegue() {
-		return new Collegue(nom, prenoms, dateDeNaissance, photoUrl);
+		return new Collegue(nom, prenoms, email, dateDeNaissance, photoUrl);
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
