@@ -3,12 +3,14 @@ package dev.collegues.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import dev.collegues.dto.CreerCollegueReqDto;
 import dev.collegues.dto.MessageErreurDto;
+import dev.collegues.dto.PhotoCollegueDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +52,11 @@ public class ColleguesController {
     @GetMapping
     public ResponseEntity<List<Collegue>> collegues() {
         return ResponseEntity.status(200).body(collegueRepository.findAll());
+    }
+
+    @GetMapping("/photos")
+    public List<PhotoCollegueDto> photos() {
+        return collegueRepository.findAll().stream().map(collegue -> new PhotoCollegueDto(collegue.getMatricule(), collegue.getPhotoUrl())).collect(toList());
     }
 
     /**
